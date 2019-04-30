@@ -41,10 +41,10 @@ class Server(BaseHTTPRequestHandler):
             # add a property to the object, just to mess with data
             payload = {
                 "success": "1",
-                "data": [
-                    {"task_uuid": "efb625b9942e000004751393ce42030d"}
-                ]
-            }
+                "data": {
+                    "task_uuid": "efb625b9942e000004751393ce42030d"
+                }}
+
         elif message.has_key("test"):
             payload = {
                 "success": "1",
@@ -95,13 +95,12 @@ class Server(BaseHTTPRequestHandler):
         else:
             payload = {
                 "success": 1,
-                "data": [
-                    {"task": "efb625b9942e000004751393ce42030d"}
-                ],
-                "after": "2016 - 03 - 11 20:00:00",
-                "more_results_available": 0,
-                "before": "2016 - 03 - 11 20:45:22"
-            }
+                "data": {
+                    "task": ["efb625b9942e000004751393ce42030d"],
+                    "after": "2016 - 03 - 11 20:00:00",
+                    "more_results_available": 0,
+                    "before": "2016 - 03 - 11 20:45:22"
+                }}
 
         # send the message back
         self._set_headers()
