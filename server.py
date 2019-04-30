@@ -1,3 +1,4 @@
+import datetime
 from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
 import SocketServer
 import json
@@ -52,10 +53,12 @@ class Server(BaseHTTPRequestHandler):
             }
 
         elif message.has_key("uuid"):
+            timeNow = datetime.datetime.utcnow()
+            timeNow = timeNow.strftime("%Y-%m-%d %H:%M:%S")
             payload = {
                 "success": 1,
                 "data": {
-                    "submission": "2016-03-11 20:33:37",
+                    "submission": timeNow,
                     "child_tasks": [],
                     "reports": [
                         {
