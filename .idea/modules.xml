@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/PythonServer.iml" filepath="$PROJECT_DIR$/.idea/PythonServer.iml" />
+      <module fileurl="file://$USER_HOME$/fame/fame/modules/community/processing/lastline/.idea/lastline.iml" filepath="$USER_HOME$/fame/fame/modules/community/processing/lastline/.idea/lastline.iml" />
     </modules>
   </component>
 </project>
