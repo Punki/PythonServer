@@ -59,45 +59,9 @@ class Server(BaseHTTPRequestHandler):
         elif message.has_key("OLDtestData"):
             timeNow = datetime.datetime.utcnow()
             timeNow = timeNow.strftime("%Y-%m-%d %H:%M:%S")
-            payload = {
-                "success": 1,
-                "data": {
-                    "submission": timeNow,
-                    "child_tasks": [],
-                    "reports": [
-                        {
-                            "relevance": 0.55,
-                            "report_versions": [
-                                "ll-int-win",
-                                "ll-win-timeline-based",
-                                "ioc:ll",
-                                "ioc:stix",
-                                "ioc:openioc",
-                                "ioc:openioc:tanium",
-                                "ll-win-timeline-thread-based"
-                            ],
-                            "description": "Dynamic analysis on Microsoft Windows XP",
-                            "report_uuid": "2fbffe68406f50553d8d5400f3e3ef9c:1cd12065e88c0bc1gZQo-WyzDu6SACX0Mcqnc6xY1PVupHmy5FR94WVo73c"
-                        },
-                        {
-                            "relevance": 0.55,
-                            "report_versions": [
-                                "ll-int-win",
-                                "ll-win-timeline-based",
-                                "ioc:ll",
-                                "ioc:stix",
-                                "ioc:openioc",
-                                "ioc:openioc:tanium",
-                                "ll-win-timeline-thread-based"
-                            ],
-                            "description": "Dynamic analysis on Microsoft Windows 7",
-                            "report_uuid": "2fbffe68406f50553d8d5400f3e3ef9c:737cb9037c28a797t7SgcBw9kSxNRrstBsnNrl9ql3PaUlmdmQJkQKjYX60"
-                        }
-                    ],
-                    "task_uuid": "efb625b9942e000004751393ce42030d",
-                    "score": 100
-                }
-            }
+            with open('data.json') as json_file:
+                payload = json.load(json_file)
+
 
         else:
             payload = {
