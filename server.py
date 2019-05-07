@@ -33,10 +33,18 @@ class Server(BaseHTTPRequestHandler):
         length = int(self.headers.getheader('content-length'))
         message = json.loads(self.rfile.read(length))
 
+        if message.has_key('after'):
+            self.after =  message.get('after')
+        else:
+            after = datetime.datetime.utcnow()
+            self.after = after.strftime("%Y-%m-%d %H:%M:%S")
+
         payload = {
             "success": "0",
             "im": "empty!",
         }
+        bevor = datetime.datetime.utcnow()
+        bevor = bevor.strftime("%Y-%m-%d %H:%M:%S")
 
         if message.has_key('url'):
             # add a property to the object, just to mess with data
@@ -46,24 +54,41 @@ class Server(BaseHTTPRequestHandler):
                     "task_uuid": "efb625b9942e000004751393ce42030d"
                 }}
 
-        elif message.has_key("test"):
-            payload = {
-                "success": "1",
-                "im a": "test!",
-            }
-
         elif message.has_key("uuid"):
             with open(r'/home/pinki/PycharmProjects/PythonServer/report.json', 'r') as json_file:
                 payload = json.load(json_file)
 
-        elif message.has_key("OLDtestData"):
-            timeNow = datetime.datetime.utcnow()
-            timeNow = timeNow.strftime("%Y-%m-%d %H:%M:%S")
-            with open('data.json') as json_file:
-                payload = json.load(json_file)
-
+        elif message.has_key("moreData"):
+            payload = {
+                "success": 1,
+                "data": {
+                    "tasks": [
+                        "7777777777777777777777777777777",
+                        "8888888888888888888888888888888",
+                        "9999999999999999999999999999999"
+                    ],
+                    "after": self.after,
+                    "more_results_available": 1,
+                    "before": bevor
+                }
+            }
+        elif message.has_key("noMore"):
+              payload = {
+                "success": 1,
+                "data": {
+                    "tasks": [
+                        "111111111111111111111111111111111",
+                        "efb625b9942e000004751393ce42030d",
+                        "222222222222222222222222222222222"
+                    ],
+                    "after": self.after,
+                    "more_results_available": 0,
+                    "before": "2016 - 03 - 11 20:45:22"
+                }
+            }
 
         else:
+            print("in Server Else!")
             payload = {
                 "success": 1,
                 "data": {
@@ -72,6 +97,7 @@ class Server(BaseHTTPRequestHandler):
                     "more_results_available": 0,
                     "before": "2016 - 03 - 11 20:45:22"
                 }}
+
 
         # send the message back
         self._set_headers()
