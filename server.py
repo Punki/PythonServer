@@ -55,7 +55,7 @@ class Server(BaseHTTPRequestHandler):
                 }}
 
         elif message.has_key("uuid"):
-            with open(r'/home/pinki/PycharmProjects/PythonServer/report.json', 'r') as json_file:
+            with open(r'report.json', 'r') as json_file:
                 payload = json.load(json_file)
 
         elif message.has_key("moreData"):
