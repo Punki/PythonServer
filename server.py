@@ -54,6 +54,10 @@ class Server(BaseHTTPRequestHandler):
                     "task_uuid": "efb625b9942e000004751393ce42030d"
                 }}
 
+        elif message.has_key("username"):
+            payload = {"success": "1",}
+
+
         elif message.has_key("uuid"):
             with open(r'report.json', 'r') as json_file:
                 payload = json.load(json_file)
